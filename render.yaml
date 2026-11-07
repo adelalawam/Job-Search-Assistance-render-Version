@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: job-search-assistance
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATA_DIR
+        value: /var/data
+      - key: DATABASE_URL
+        value: sqlite:////var/data/jobs.db
+    disk:
+      name: job-search-data
+      mountPath: /var/data
+      sizeGB: 1
